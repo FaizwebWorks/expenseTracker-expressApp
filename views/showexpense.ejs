@@ -1,0 +1,12 @@
+<%- include("partials/header")%> 
+<%- include("partials/nav")%>
+<h1 class="font-bold text-3xl">Watch expenses</h1>
+<ul>
+  <% expenses.forEach( (expense) => { %>
+    <li>
+      <%= expense.title %> |
+      <a class="text-blue-600 underline" href="/expense/details/<%= expense._id %>">Details</a>
+    </li>
+  <% }) %>
+</ul>
+<%- include("partials/footer")%>
