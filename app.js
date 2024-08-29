@@ -1,32 +1,55 @@
 var createError = require("http-errors");
 var express = require("express");
+var app = express();
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const dotenv = require("dotenv")
+const expressSession = require("express-session");
+const passport = require("passport");
+const userModel = require("./models/user.schema");
 
-dotenv.config({path: "./.env"})
+// env config
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 
 //db connection
 require("./config/db");
 
 var indexRouter = require("./routes/index.routes");
 var expenseRouter = require("./routes/expenses.routes");
-
-var app = express();
+var userRouter = require("./routes/user.routes");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// logger
 app.use(logger("dev"));
+// body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// static route
 app.use(express.static(path.join(__dirname, "public")));
 
+// passport & session config
+app.use(
+  expressSession({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.EXPRESS_SESSION_SECRET,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(userModel.serializeUser());
+passport.deserializeUser(userModel.deserializeUser());
+
+// base routes
 app.use("/", indexRouter);
 app.use("/expense", expenseRouter);
+app.use("/user", userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

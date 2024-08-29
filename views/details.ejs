@@ -1,11 +1,37 @@
-<%- include("partials/header")%> 
-<%- include("partials/nav")%>
-<h1 class="font-bold text-3xl p-5">Details</h1>
-<h3 class="px-5"> <span class="font-semibold text-lg">Title: </span><%= expense.title %></h3>
-<h3 class="px-5"> <span class="font-semibold text-lg">Amount: </span><%= expense.amount %></h3>
-<h3 class="px-5"> <span class="font-semibold text-lg">Category: </span><%= expense.category %></h3>
-<h3 class="px-5"> <span class="font-semibold text-lg">Remark: </span><%= expense.remark %></h3>
-<h3 class="px-5 mb-4"> <span class="font-semibold text-lg">Payment Mode: </span><%= expense.paymentmode %></h3>
-<a class="font-semibold bg-yellow-500 px-3 py-2 rounded-md text-white m-4" href="/expense/update/<%= expense._id%>">Edit</a>
-<a class="font-semibold bg-red-600 px-3 py-2 rounded-md text-white" href="/expense/delete/<%= expense._id%>">Delete</a>
+<%- include("partials/header")%> <%- include("partials/nav")%>
+<div class="flex flex-col mt-5 px-10">
+  <a href="/expense/show" class="text-zinc-400 text-sm font-medium mb-4">
+    <i class="ri-arrow-left-line"></i>
+    Go back
+  </a>
+  <h1 class="font-semibold text-3xl">Details</h1>
+  <div class="text-lg mt-4 font-medium">
+    Title: <span class="text-zinc-400 ml-2"><%= expense.title %></span>
+  </div>
+  <div class="text-lg mt-2 font-medium">
+    Amount: <span class="text-zinc-400 ml-2"><%= expense.amount %></span>
+  </div>
+  <div class="text-lg mt-2 font-medium">
+    Category: <span class="text-zinc-400 ml-2"><%= expense.category %></span>
+  </div>
+  <div class="text-lg mt-2 font-medium">
+    Remark: <span class="text-zinc-400 ml-2"><%= expense.remark %></span>
+  </div>
+  <div class="text-lg mt-2 font-medium">
+    Payment Mode:
+    <span class="text-zinc-400 ml-2"><%= expense.paymentmode %></span>
+  </div>
+  <div class="flex items-center gap-5 mt-4">
+    <a
+      class="font-medium bg-yellow-500 hover:bg-yellow-600 w-fit px-4 py-1 rounded-md transition-all duration-300"
+      href="/expense/update/<%= expense._id%>"
+      >Edit</a
+    >
+    <a
+      class="font-medium bg-red-500 hover:bg-red-600 w-fit px-4 py-1 rounded-md transition-all duration-300"
+      href="/expense/delete/<%= expense._id%>"
+      >Delete</a
+    >
+  </div>
+</div>
 <%- include("partials/footer")%>

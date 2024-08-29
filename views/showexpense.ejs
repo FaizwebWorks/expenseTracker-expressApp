@@ -1,12 +1,19 @@
-<%- include("partials/header")%> 
-<%- include("partials/nav")%>
-<h1 class="font-bold text-3xl">Watch expenses</h1>
-<ul>
-  <% expenses.forEach( (expense) => { %>
-    <li>
-      <%= expense.title %> |
-      <a class="text-blue-600 underline" href="/expense/details/<%= expense._id %>">Details</a>
+<%- include("partials/header")%> <%- include("partials/nav")%>
+<div class="flex flex-col mt-5 px-10">
+  <h1 class="font-semibold text-3xl">Watch expenses</h1>
+  <ul class="flex flex-col gap-4 mt-4">
+    <% expenses.forEach( (expense) => { %>
+    <li class="flex gap-4 items-center">
+      <p class="font-medium text-lg"><%= expense.title %></p>
+      <a
+        class="font-medium bg-emerald-500 hover:bg-emerald-600 px-4 py-1 rounded-md transition-all duration-300"
+        href="/expense/details/<%= expense._id %>"
+        >Details</a
+      >
     </li>
-  <% }) %>
-</ul>
+    <% }) %>
+  </ul>
+</div>
 <%- include("partials/footer")%>
+
+<!-- font-medium bg-emerald-500 hover:bg-emerald-600 px-4 py-1 rounded-md transition-all duration-300 -->

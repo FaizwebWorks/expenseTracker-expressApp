@@ -1,11 +1,46 @@
 <%- include("partials/header")%> <%- include("partials/nav")%>
-<h1 class="font-bold text-3xl ml-4 mt-4">Create expenses</h1>
-<form action="/expense/create" method="post" class="p-5">
-  <input class="p-2 rounded-md mr-2 border-2 border-zinc-300" type="text" name="title" placeholder="Title" />
-  <input class="p-2 rounded-md mr-2 border-2 border-zinc-300" type="number" name="amount" placeholder="Amount" />
-  <input class="p-2 rounded-md mr-2 border-2 border-zinc-300" type="text" name="category" placeholder="Category" />
-  <input class="p-2 rounded-md mr-2 border-2 border-zinc-300" type="text" name="remark" placeholder="Remark" />
-  <input class="p-2 rounded-md mr-2 border-2 border-zinc-300" type="text" name="paymentmode" placeholder="Payment Mode" />
-  <button class="bg-blue-500 text-white px-3 py-2 rounded-md font-bold">Log Expense</button>
-</form>
+<div class="flex flex-col px-10 mt-5">
+  <h1 class="font-semibold text-3xl">Create expenses</h1>
+  <form
+    action="/expense/create"
+    method="post"
+    class="flex flex-col w-fit gap-4 mt-4"
+  >
+    <input
+      class="bg-zinc-700 w-60 px-4 py-2 rounded-lg"
+      type="text"
+      name="title"
+      placeholder="Title"
+    />
+    <input
+      class="bg-zinc-700 w-60 px-4 py-2 rounded-lg"
+      type="number"
+      name="amount"
+      placeholder="Amount"
+    />
+    <input
+      class="bg-zinc-700 w-60 px-4 py-2 rounded-lg"
+      type="text"
+      name="category"
+      placeholder="Category"
+    />
+    <input
+      class="bg-zinc-700 w-60 px-4 py-2 rounded-lg"
+      type="text"
+      name="remark"
+      placeholder="Remark"
+    />
+    <input
+      class="bg-zinc-700 w-60 px-4 py-2 rounded-lg"
+      type="text"
+      name="paymentmode"
+      placeholder="Payment Mode"
+    />
+    <button
+      class="bg-blue-500 hover:bg-blue-600 transition-all duration-300 inline-block w-fit px-6 py-2 rounded-md font-semibold mt-2"
+    >
+      Log Expense
+    </button>
+  </form>
+</div>
 <%- include("partials/footer")%>

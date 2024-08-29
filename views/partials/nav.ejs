@@ -1,7 +1,26 @@
-<nav>
-    <!-- <img src="https://cdn-icons-png.flaticon.com/512/5501/5501375.png" alt=""> -->
-    <a href="/">Home</a>
-    <a href="/expense/create">Log expenses</a>
-    <a href="/expense/show">Watch expenses</a>
-    <a href="/about">About</a>
+<nav
+  class="border-b-[.1px] border-zinc-700 w-full px-10 py-5 flex items-center justify-between"
+>
+  <div class="flex items-center gap-4">
+    <img
+      width="35"
+      src="https://cdn-icons-png.flaticon.com/512/5501/5501375.png"
+      alt=""
+    />
+    <% if(user) { %>
+      <a class="text-3xl font-bold" href="/user/profile">Expense Tracker</a>
+    <% } else { %>
+      <a class="text-3xl font-bold" href="/">Expense Tracker</a>
+    <% } %>
+  </div>
+  <div class="flex items-center gap-4">
+    <% if(user) { %>
+    <a class="inline-block hover:text-zinc-300 transition-all duration-300 font-medium" href="/user/profile">Home</a>
+    <a class="inline-block hover:text-zinc-300 transition-all duration-300 font-medium" href="/expense/create">Log expenses</a>
+    <a class="inline-block hover:text-zinc-300 transition-all duration-300 font-medium" href="/expense/show">Watch expenses</a>
+    <% } else { %>
+    <a class="inline-block hover:text-zinc-300 transition-all duration-300 font-medium" href="/">Home</a>
+    <% } %>
+    <a class="inline-block hover:text-zinc-300 transition-all duration-300 font-medium" href="/about">About</a>
+  </div>
 </nav>
