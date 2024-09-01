@@ -34,29 +34,33 @@ router.get("/signin", function (req, res, next) {
   res.render("signinuser", { title: "Expense Tracker | Signin", user: req.user, });
 });
 
-// router.post("/signin", passport.authenticate("local"), async (req, res, next) => {
-//     try {
-//       res.redirect("/user/profile");
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
-
-router.post(
-  "/signin",
-  passport.authenticate("local", {
-    successRedirect: "/user/profile",
-    failureRedirect: "/user/signin",
-  }),
-  (req, res) => {}
+router.post("/signin", passport.authenticate("local"), async (req, res, next) => {
+    try {
+      req.flash("success", "Successfully Logged in!")
+      res.redirect("/user/profile");
+    } catch (error) {
+      console.log(error.message)
+      next(error);
+    }
+  }
 );
+
+// router.post(
+//   "/signin",
+//   passport.authenticate("local", {
+//     successRedirect: "/user/profile",
+//     failureRedirect: "/user/signin",
+//   }),
+//   (req, res) => {}
+// );
 
 router.get("/profile", isLoggedIn, async (req, res, next) => {
   try {
+    const message = req.flash("success")
     res.render("profile", {
       title: "Expense Tracker | Profile",
       user: req.user,
+      message: message
     });
   } catch (error) {
     next(error);

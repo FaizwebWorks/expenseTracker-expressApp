@@ -7,6 +7,7 @@ var logger = require("morgan");
 const expressSession = require("express-session");
 const passport = require("passport");
 const userModel = require("./models/user.schema");
+const flash = require("connect-flash")
 
 // env config
 const dotenv = require("dotenv");
@@ -40,6 +41,9 @@ app.use(
     secret: process.env.EXPRESS_SESSION_SECRET,
   })
 );
+
+// flash
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
