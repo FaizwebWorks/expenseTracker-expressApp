@@ -1,0 +1,32 @@
+<div
+  id="confirmation-modal"
+  class="modal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full backdrop-blur-sm z-50"
+  style="display: none"
+>
+  <div
+    class="modal-content flex flex-col gap-4 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-zinc-800 h-fit w-fit px-5 py-5 pb-1 relative text-center rounded-lg"
+  >
+    <p class="w-[80%] text-left leading-none font-medium text-lg mb-2">
+      Are you sure you want to delete your account?
+    </p>
+    <div class="flex items-center w-full gap-4">
+      <button
+        id="confirm-delete"
+        class="btn-confirm bg-[#FF4500] hover:bg-[#D43F00] transition-all duration-300 font-semibold cursor-pointer rounded-lg py-2 w-1/2"
+      >
+        Yes, Delete
+      </button>
+      <button
+        id="cancel-delete"
+        class="btn-cancel bg-zinc-300 hover:bg-zinc-200 transition-all duration-300 text-black font-semibold cursor-pointer rounded-lg py-2 w-1/2"
+      >
+        Cancel
+      </button>
+    </div>
+    <span id="close-modal" class="close">
+      <i
+        class="ri-close-large-line absolute top-2 right-3 text-lg cursor-pointer text-white"
+      ></i>
+    </span>
+  </div>
+</div>

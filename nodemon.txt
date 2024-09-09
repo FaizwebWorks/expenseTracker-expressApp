@@ -1,6 +1,0 @@
-// {
-//     "watch": ["views", "routes", "public"],
-//     "ext": "js,json,ejs",
-//     "ignore": [".gitignore", "node_modules"],
-//     "exe": "npm run tailwind && npm start"
-// }

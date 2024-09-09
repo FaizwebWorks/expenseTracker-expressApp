@@ -1,0 +1,80 @@
+<%- include("partials/header")%> <%- include("partials/nav")%>
+<!--  -->
+<div class="flex flex-col mt-10 px-10 items-center justify-center">
+  <div
+    class="flex flex-col items-center justify-center bg-zinc-800 p-10 py-10 gap-5 rounded-lg"
+  >
+    <div class="absolute left-0 top-0 mx-10 my-28">
+      <a href="/user/profile" class="text-zinc-400 text-sm font-medium mb-4">
+        <i class="ri-arrow-left-line"></i>
+        Go back
+      </a>
+    </div>
+    <h1 class="font-semibold relative text-2xl">Update user details</h1>
+    <!-- <i
+      class="ri-pencil-fill cursor-pointer absolute text-lg bg-zinc-600 h-8 w-8 p-4 flex items-center justify-center rounded-full avatar-icon"
+    ></i> -->
+    <div
+      class="relative avatar bg-red-50 h-28 w-28 rounded-full object-cover overflow-hidden"
+    >
+      <% if(user.avatar != ""){ %>
+        <img
+          class="h-full w-full object-cover border-none"
+          src="/images/<%= user.avatar %>"
+          alt="avatar"
+        />
+        <% } else { %>
+          <img
+            class="h-full w-full object-cover"
+            src="/images/default.png"
+            alt="avatar"
+          />
+      <% } %>
+    </div>
+    <button
+      id="avatar-upload-btn"
+      class="w-fit px-4 -mt-2 py-1 font-semibold rounded-md bg-zinc-700"
+    >
+      Change Profile
+    </button>
+    <form
+      action="/user/avatar"
+      method="post"
+      class="hidden avatar-form"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="avatar" class="avatar-input" />
+    </form>
+    <form
+      action="/user/update-user"
+      method="post"
+      class="flex flex-col items-center"
+    >
+      <label class="w-full text-left mb-2 font-medium" for="username"
+        >Username</label
+      >
+      <input
+        class="block w-60 bg-transparent border-[1px] border-zinc-700 px-4 py-2 mb-4 rounded-md"
+        type="text"
+        name="username"
+        placeholder="username"
+        value="<%= user.username %>"
+      />
+      <label class="w-full text-left mb-2 font-medium" for="email">Email</label>
+      <input
+        class="block w-60 bg-transparent border-[1px] border-zinc-700 px-4 py-2 mb-4 rounded-md"
+        type="text"
+        name="email"
+        placeholder="email"
+        value="<%= user.email %>"
+      />
+      <button
+        class="w-60 bg-[#4CAF50] hover:bg-[#45A049] transition-all duration-300 rounded-md py-1 text-[17px] font-semibold"
+      >
+        Update User
+      </button>
+    </form>
+  </div>
+</div>
+<!--  -->
+<%- include("partials/footer")%>

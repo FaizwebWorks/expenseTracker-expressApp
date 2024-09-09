@@ -1,21 +1,41 @@
 <%- include("partials/header")%> <%- include("partials/nav")%>
-<div class="flex flex-col mt-5 px-10">
-  <% if (message) { %>
-  <p
-    id="toast-message"
-    class="bg-green-400 text-white font-semibold px-4 py-2 absolute rounded-full left-1/2 -translate-x-1/2"
-    style="display: none; opacity: 0"
-  >
-    <%= message %>
-  </p>
-  <% } %>
-  <h1 class="font-bold text-3xl">Profile page</h1>
-  <a
-    class="bg-red-500 hover:bg-red-600 transition-all duration-300 inline-block w-fit px-6 py-2 rounded-md font-semibold mt-3"
-    href="/user/logout"
-    id="logout-button"
-    >Logout</a
-  >
-</div>
-<%- include("partials/footer")%>
+  <div class="flex flex-col mt-5 px-10">
+    <% if (message) { %>
+    <p
+      id="toast-message"
+      class="bg-green-500 text-white font-semibold px-4 py-2 absolute rounded-full left-1/2 -translate-x-1/2"
+      style="display: none; opacity: 0"
+    >
+      <%= message %>
+    </p>
+    <% } %>
+    <h1 class="font-bold text-3xl">Profile page</h1>
+    <div class="flex items-center gap-4 mt-3">
+      <a
+        class="bg-[#4CAF50] hover:bg-[#45A049] transition-all duration-300 inline-block w-fit px-6 py-2 rounded-md font-semibold"
+        href="/user/update-user"
+        >Update User</a
+      >
+      <a
+        class="bg-[#FFA500] hover:bg-[#FF8C00] transition-all duration-300 inline-block w-fit px-6 py-2 rounded-md font-semibold"
+        href="/user/reset-password"
+        >Reset Password</a
+      >
+      <a
+        class="bg-[#FF4500] hover:bg-[#D43F00] transition-all duration-300 inline-block w-fit px-6 py-2 rounded-md font-semibold"
+        href="/user/delete-account"
+        id="delete-account-link"
+        >Delete Account</a
+      >
+      <a
+        class="bg-[#1E90FF] hover:bg-[#1C86EE] transition-all duration-300 inline-block w-fit px-6 py-2 rounded-md font-semibold"
+        href="/user/logout"
+        id="logout-button"
+        >Logout</a
+      >
+    </div>
+  </div>
 
+  <%- include("modals/delete-confimation-modal") %>
+
+<%- include("partials/footer")%>

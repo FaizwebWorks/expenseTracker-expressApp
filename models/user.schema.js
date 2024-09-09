@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
         "Invalid email Format",
       ],
     },
+    avatar: {
+      type: String,
+      default: ""
+  },
   },
   { timestamps: true }
 );

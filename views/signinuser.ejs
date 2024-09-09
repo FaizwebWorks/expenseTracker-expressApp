@@ -5,8 +5,11 @@
     <h1 class="font-semibold text-3xl">Sign in</h1>
     <form action="/user/signin" method="post" class="flex flex-col items-center">
       <input class="block w-60 bg-transparent border-[1px] border-zinc-700 px-4 py-2 mb-4 rounded-md" type="text" name="username" placeholder="username" />
-      <input class="block w-60 bg-transparent border-[1px] border-zinc-700 px-4 py-2 mb-4 rounded-md" type="password" name="password" placeholder="password" />
-      <button class="w-60 bg-blue-500 hover:bg-blue-600 transition-all duration-300 rounded-md py-1 text-[17px] font-semibold">Sign in</button>
+      <div class="flex flex-col gap-0">
+        <input class="block w-60 bg-transparent border-[1px] border-zinc-700 px-4 py-2 mb-4 rounded-md" type="password" name="password" placeholder="password" />
+        <a href="/user/forget-password" class="text-xs text-zinc-30 -mt-2 text-zinc-300">Forget Password?</a>
+      </div>
+      <button class="w-60 mt-4 bg-[#1E90FF] hover:bg-[#1C86EE] transition-all duration-300 rounded-md py-1 text-[17px] font-semibold">Sign in</button>
     </form>
     <p class="text-sm font-medium text-zinc-400">Don't have an Account? <a class="text-white" href="/user/signup">Sign up</a></p>
   </div>

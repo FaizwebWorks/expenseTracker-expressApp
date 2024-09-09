@@ -7,7 +7,7 @@ var logger = require("morgan");
 const expressSession = require("express-session");
 const passport = require("passport");
 const userModel = require("./models/user.schema");
-const flash = require("connect-flash")
+const flash = require("connect-flash");
 
 // env config
 const dotenv = require("dotenv");
@@ -47,8 +47,12 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(userModel.serializeUser());
-passport.deserializeUser(userModel.deserializeUser());
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 // base routes
 app.use("/", indexRouter);
