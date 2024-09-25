@@ -22,8 +22,12 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: ""
-  },
+      default: "",
+    },
+    OTP: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

@@ -8,6 +8,7 @@ const expressSession = require("express-session");
 const passport = require("passport");
 const userModel = require("./models/user.schema");
 const flash = require("connect-flash");
+const sendEmail = require("./services/email");
 
 // env config
 const dotenv = require("dotenv");

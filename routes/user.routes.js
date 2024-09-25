@@ -8,7 +8,7 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const { isLoggedIn } = require("../middlewares/auth.middleware");
 const upload = require("../middlewares/multimedia.middleware");
-const { title } = require("process");
+const sendEmail = require("../services/email");
 passport.use(new localStrategy(userModel.authenticate()));
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
@@ -171,8 +171,18 @@ router.post("/forget-password", async (req, res, next) => {
     if (!user) return next(new Error("User not found!"));
 
     // send email to user with the OTP
-    // and save the same OTP to the database
+    const OTP = Math.floor(100000 + Math.random() * 900000);
+    console.log("OTP:", OTP);
+    sendEmail(
+      process.env.EMAIL_USER,
+      "OTP for Reset Password",
+      OTP.toString(), // Convert OTP to string
+      `<h1> OTP for Reset Password: ${OTP}</h1>`
+    );
 
+    // save the OTP to the database
+    user.OTP = OTP;
+    await user.save();
     res.redirect(`/user/forget-password/${user._id}`);
   } catch (error) {
     next(error);
@@ -193,8 +203,11 @@ router.post("/forget-password/:id", async (req, res, next) => {
 
     // compare the req.body.otp with the otp in database
     // if matched redirect to password page else ERROR
-
-    res.redirect(`/user/set-password/${user._id}`);
+    if (user.OTP == req.body.otp) {
+      res.redirect(`/user/set-password/${user._id}`);
+    } else {
+      res.redirect("/user/forget-password");
+    }
   } catch (error) {
     next(error);
   }
@@ -247,32 +260,35 @@ router.get(
   },
   passport.authenticate("google", { failureRedirect: "/" }),
   async (req, res, next) => {
-    const isUserAlreadyExists = await userModel.findOne({
-      email: req.user.emails[0].value,
-    });
-
-    if (isUserAlreadyExists) {
-      req.login(isUserAlreadyExists, (err) => {
-        if (err) {
-          return next(err);
-        }
+    try {
+      const isUserAlreadyExists = await userModel.findOne({
+        email: req.user.emails[0].value,
       });
-      return res.redirect("/user/profile");
-    }
 
-    const newUser = await userModel.create({
-      username: req.user.displayName,
-      email: req.user.emails[0].value,
-      avatar: req.user.photos[0].value,
-    });
+      if (isUserAlreadyExists) {
+        req.login(isUserAlreadyExists, (err) => {
+          if (err) {
+            return next(err);
+          }
+          return res.redirect("/user/profile"); // Ensure only one response is sent
+        });
+      } else {
+        const newUser = await userModel.create({
+          username: req.user.displayName,
+          email: req.user.emails[0].value,
+          avatar: req.user.photos[0].value,
+        });
 
-    req.login(newUser, (err) => {
-      if (err) {
-        return next(err);
+        req.login(newUser, (err) => {
+          if (err) {
+            return next(err);
+          }
+          return res.redirect("/user/profile"); // Ensure only one response is sent
+        });
       }
-    });
-
-    res.redirect("/user/profile");
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
